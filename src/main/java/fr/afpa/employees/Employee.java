@@ -11,29 +11,75 @@ Vous pourrez vous aider du PDF disponible sur pour obtenir des informations sur 
 
 class Employee
 {
-	/**
-	 * Matricule de l'employé
-	 */
+	// employee attributes
 	private String registrationNumber;
+	private String lastName;
+	private String firstName;
+	private double salary;
+	private final int socialPart;
 
-	// TODO compléter les attributs comme présenté dans le PDF
-
-	// TODO compléter le constructeur de la classe
-	public Employee(String registrationNumber) {
+	// constructor
+	public Employee(String registrationNumber, String lastName, String firstName, double salary, int socialPart) {
 		this.registrationNumber = registrationNumber;
+		this.lastName = lastName;
+		this.firstName = firstName;
+		this.salary = salary;
+		this.socialPart = socialPart;
 	}
 
-	// TODO implémenter les setters et getters de la classe (permet d'accéder aux attributs privés)
+	@Override
+	public String toString() {
+		return "Employee [registrationNumber=" + registrationNumber + ", lastName=" + lastName + ", firstName="
+				+ firstName + ", salary=" + salary + ", socialPart=" + socialPart + "]";
+	}
+
+
+	// getters
 	public String getRegistrationNumber() {
 		return registrationNumber;
 	}
 
-	public void setRegistrationNumber(String registrationNumber) throws Exception {
+
+
+	public String getLastName() {
+		return lastName;
+	}
+
+
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+
+
+	public double getSalary() {
+		return salary;
+	}
+
+
+
+	public int getSocialPart() {
+		return socialPart;
+	}
+
+
+
+	// setters
+	public void setRegistrationNumber(String registrationNumber) {
 		this.registrationNumber = registrationNumber;
 	}
 
-	// TODO ajouter les getters et les setters
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-	// TODO implémenter la méthode "toString()" qui renvoie une chaîne de caractère qui représente un objet de la classe employé
-	// plus d'information sur la méthode "toString()" -> https://codegym.cc/fr/groups/posts/fr.986.mthode-java-tostring
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
+
 }
