@@ -1,5 +1,7 @@
 package fr.afpa.employees;
 
+import java.time.LocalDate;
+
 /*
 Objectif :
 L’objectif de ce TP est de concevoir un programme en console basé sur une approche objet et
@@ -16,25 +18,35 @@ class Employee
 	private String lastName;
 	private String firstName;
 	private double salary;
+	private final LocalDate birthDate;
 	private final int socialPart;
 
 	// constructor
-	public Employee(String registrationNumber, String lastName, String firstName, double salary, int socialPart) {
+	public Employee(String registrationNumber, String lastName, String firstName, double salary, int socialPart, LocalDate birthDate) {
 		this.registrationNumber = registrationNumber;
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.salary = salary;
 		this.socialPart = socialPart;
+		this.birthDate = birthDate;
 	}
 
 	@Override
 	public String toString() {
-		return "Employee [registrationNumber=" + registrationNumber + ", lastName=" + lastName + ", firstName="
-				+ firstName + ", salary=" + salary + ", socialPart=" + socialPart + "]";
+		return "Employee \nregistrationNumber = " + registrationNumber + ", \nlastName = " + lastName + ", \nfirstName = "
+				+ firstName + ", \nsalary = " + salary + ", \nsocialPart = " + socialPart + ", \nbirthDate = " + birthDate + ", \nnetSalary = " + getNetSalary();
 	}
 
 
 	// getters
+	public double getNetSalary() {
+		return salary - (0.3*salary);
+	}
+
+	public String getFullName() {
+		return (firstName + " " + lastName);
+	}
+
 	public String getRegistrationNumber() {
 		return registrationNumber;
 	}
@@ -61,6 +73,10 @@ class Employee
 
 	public int getSocialPart() {
 		return socialPart;
+	}
+
+	public LocalDate getbirthDate () {
+		return birthDate;
 	}
 
 
