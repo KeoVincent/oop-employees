@@ -46,6 +46,7 @@ class Employee {
 				+ ", \ndaysUntilBirthday = " + daysUntilBirthday(birthDate)
 				+ ", \nisRegistrationNumber = " + checkRegistrationNumber(registrationNumber)
 				+ ", \nisName = " + checkName(getFullName());
+				//+ ", \nisDate = " + checkDate(birthDate);
 	}
 
 
@@ -67,8 +68,32 @@ class Employee {
 		boolean flag = false;
 		for (int i = 0; i < registrationNumber.length(); i++) {
 			char ch = registrationNumber.charAt(i);
-			if (i == 0 || i == 1 || i == 4 || i == 5) {
+			if (i == 0 || i == 1 || i == 5 || i == 6) {
+				if (Character.isDigit(ch) == true) {
+					flag = true;
+				} else {
+					return false;
+				}
+			} else {
+				if (Character.isLetter(ch) == true) {
+					flag = true;
+				} else {
+					return false;
+				}
+			}
+		}
+		return flag;
+	}
+
+	public boolean checkDate (String birthDate) {
+		
+		boolean flag = false;
+		for (int i = 0; i < birthDate.length(); i++) {
+			char ch = birthDate.charAt(i);
+			if (i == 0 || i == 1 || i == 2 || i == 3 || i == 5 || i == 6 || i == 8 || i == 9) {
 				flag = Character.isDigit(ch);
+			} else {
+				return false;
 			}
 		}
 		return flag;
@@ -83,8 +108,7 @@ class Employee {
 			if (Character.isLetter(ch)) {
 				flag = true;
 			} else {
-				flag = false;
-				return flag;
+				return false;
 			}
 		}
 	
