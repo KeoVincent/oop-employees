@@ -1,6 +1,6 @@
 package fr.afpa.employees;
 
-import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 
 /**
  * Classe principale du projet, contient la fonction "main"
@@ -13,6 +13,15 @@ class EmployeeMain {
 		Employee employee2 = new Employee("22DEF33", "FRANCOIS", "Françoise", 667.0, 30, "1999-10-25");
 		Employee employee3 = new Employee("42WEB52", "974", "Daniel", 5000.0, 30, "1979-08-15");
 		Employee employee4 = new Employee("421JR36", "MALIK", "Abdel", 1995.0, 30, "1984-06-07");
+
+		employees.add(employee1);
+		employees.add(employee2);
+		employees.add(employee3);
+		employees.add(employee4);
+
+		for (Employee employee : employees) {
+			System.out.println(employee);
+		}
 
 		// try {
 		// employee1.setRegistrationNumber("EEAZE88");
@@ -32,7 +41,8 @@ class EmployeeMain {
 		// 	// TODO: handle exception
 		// }
 		try {
-			employee1.setBirthDate("2002-05-05");			
+			employee1.setBirthDate("2002-05-05");
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			// TODO: handle exception
@@ -43,5 +53,7 @@ class EmployeeMain {
 
 
 	}
+
+	protected static ArrayList<Employee> employees = new ArrayList<Employee>();
 
 }

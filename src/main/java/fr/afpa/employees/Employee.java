@@ -44,15 +44,14 @@ class Employee {
 				+ ", \nnetSalary = " + getNetSalary()
 				+ ", \ndaysUntilBirthday = " + daysUntilBirthday(birthDate)
 				+ ", \nisRegistrationNumber = " + checkRegistrationNumber(registrationNumber);
-		// + ", \nisDate = " + checkDate(birthDate);
 	}
 
 	// methods
 	public long daysUntilBirthday(String strBirthDate) {
 
-		LocalDate birthDate = LocalDate.parse(strBirthDate);
+		LocalDate localBirthDate = LocalDate.parse(strBirthDate);
 		LocalDate currentDate = LocalDate.now();
-		LocalDate nextBirthday = birthDate.withYear(currentDate.getYear());
+		LocalDate nextBirthday = localBirthDate.withYear(currentDate.getYear());
 
 		if (nextBirthday.isBefore(currentDate) || nextBirthday.isEqual(currentDate)) {
 			nextBirthday = nextBirthday.plusYears(1);
@@ -70,13 +69,13 @@ class Employee {
 		for (int i = 0; i < registrationNumber.length(); i++) {
 			char ch = registrationNumber.charAt(i);
 			if (i == 0 || i == 1 || i == 5 || i == 6) {
-				if (Character.isDigit(ch) == true) {
+				if (Character.isDigit(ch)) {
 					isRegistrationNumber = true;
 				} else {
 					return false;
 				}
 			} else {
-				if (Character.isLetter(ch) == true) {
+				if (Character.isLetter(ch)) {
 					isRegistrationNumber = true;
 				} else {
 					return false;
@@ -85,20 +84,6 @@ class Employee {
 		}
 		return isRegistrationNumber;
 	}
-
-	// private boolean checkDate(String birthDate) {
-
-	// 	boolean flag = false;
-	// 	for (int i = 0; i < birthDate.length(); i++) {
-	// 		char ch = birthDate.charAt(i);
-	// 		if (i == 0 || i == 1 || i == 2 || i == 3 || i == 5 || i == 6 || i == 8 || i == 9) {
-	// 			flag = Character.isDigit(ch);
-	// 		} else {
-	// 			return false;
-	// 		}
-	// 	}
-	// 	return flag;
-	// }
 
 	private boolean checkName(String name) throws Exception {
 
@@ -172,16 +157,15 @@ class Employee {
 	// setters
 	public void setRegistrationNumber(String registrationNumber) throws Exception {
 
-		if (checkRegistrationNumber(registrationNumber) == true) {
+		if (checkRegistrationNumber(registrationNumber)) {
 			this.registrationNumber = registrationNumber;
 		} else {
-			throw new Exception("Mauvait format du matricule ptn");
+			throw new Exception("Invalid registration number");
 		}
-
 	}
 
 	public void setLastName(String lastName) throws Exception {
-		if (checkName(lastName) == true) {
+		if (checkName(lastName)) {
 			this.lastName = lastName;
 		} else {
 			throw new Exception("Name can't include special characters except '-'");
@@ -194,7 +178,6 @@ class Employee {
 		} else {
 			throw new Exception("Name can't include special characters except '-'");
 		}
-
 	}
 
 	public void setSalary(double salary) {
@@ -203,12 +186,11 @@ class Employee {
 
 	public void setBirthDate(String birthDate) throws Exception{
 
-		if (checkDate(birthDate) == true) {
+		if (checkDate(birthDate)) {
 			this.birthDate = birthDate;
 		} else {
 			throw new Exception("Birth date is not valid");
 		}
-
 	}
 
 }
