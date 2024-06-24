@@ -32,13 +32,13 @@ class EmployeeMain {
 		// 	// TODO: handle exception
 		// }
 		try {
-			employee1.setFirstName("Jean-Michel");			
+			employee1.setBirthDate("2002-05-05");			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			// TODO: handle exception
 		}
 
-		System.out.println(employee1.getFullName());
+		System.out.println(employee1.toString());
 
 
 

@@ -18,7 +18,7 @@ class Employee {
 	private String lastName;
 	private String firstName;
 	private double salary;
-	private LocalDate birthDate;
+	private String birthDate;
 	private final int socialPart;
 
 	// constructor
@@ -29,7 +29,7 @@ class Employee {
 		this.firstName = firstName;
 		this.salary = salary;
 		this.socialPart = socialPart;
-		this.birthDate = LocalDate.parse(birthDate);
+		this.birthDate = birthDate;
 	}
 
 	@Override
@@ -44,13 +44,13 @@ class Employee {
 				+ ", \nnetSalary = " + getNetSalary()
 				+ ", \ndaysUntilBirthday = " + daysUntilBirthday(birthDate)
 				+ ", \nisRegistrationNumber = " + checkRegistrationNumber(registrationNumber);
-				//+ ", \nisDate = " + checkDate(birthDate);
+		// + ", \nisDate = " + checkDate(birthDate);
 	}
 
-
 	// methods
-	public long daysUntilBirthday(LocalDate birthDate) {
+	public long daysUntilBirthday(String strBirthDate) {
 
+		LocalDate birthDate = LocalDate.parse(strBirthDate);
 		LocalDate currentDate = LocalDate.now();
 		LocalDate nextBirthday = birthDate.withYear(currentDate.getYear());
 
@@ -61,7 +61,7 @@ class Employee {
 		return ChronoUnit.DAYS.between(currentDate, nextBirthday);
 	}
 
-	private boolean checkRegistrationNumber (String registrationNumber) {
+	private boolean checkRegistrationNumber(String registrationNumber) {
 
 		boolean isRegistrationNumber = false;
 		if (registrationNumber.length() != 7) {
@@ -86,21 +86,21 @@ class Employee {
 		return isRegistrationNumber;
 	}
 
-	private boolean checkDate (String birthDate) {
-		
-		boolean flag = false;
-		for (int i = 0; i < birthDate.length(); i++) {
-			char ch = birthDate.charAt(i);
-			if (i == 0 || i == 1 || i == 2 || i == 3 || i == 5 || i == 6 || i == 8 || i == 9) {
-				flag = Character.isDigit(ch);
-			} else {
-				return false;
-			}
-		}
-		return flag;
-	}
+	// private boolean checkDate(String birthDate) {
 
-	private boolean checkName(String name) throws Exception{
+	// 	boolean flag = false;
+	// 	for (int i = 0; i < birthDate.length(); i++) {
+	// 		char ch = birthDate.charAt(i);
+	// 		if (i == 0 || i == 1 || i == 2 || i == 3 || i == 5 || i == 6 || i == 8 || i == 9) {
+	// 			flag = Character.isDigit(ch);
+	// 		} else {
+	// 			return false;
+	// 		}
+	// 	}
+	// 	return flag;
+	// }
+
+	private boolean checkName(String name) throws Exception {
 
 		boolean isName = false;
 		for (int i = 0; i < name.length(); i++) {
@@ -112,9 +112,28 @@ class Employee {
 
 			}
 		}
-	
 
 		return isName;
+	}
+
+	private boolean checkDate(String birthDate) {
+		
+		boolean isDate = false;
+
+		if (birthDate.length() != 10) {
+			return false;
+		}
+
+		for (int i = 0; i < birthDate.length(); i++) {
+			char ch = birthDate.charAt(i);
+			if (Character.isDigit(ch) || ch == '-' || ch == '/') {
+				isDate = true;
+			} else {
+				return false;
+
+			}
+		}
+		return isDate;
 	}
 
 	// getters
@@ -146,12 +165,12 @@ class Employee {
 		return socialPart;
 	}
 
-	public LocalDate getbirthDate() {
+	public String getbirthDate() {
 		return birthDate;
 	}
 
 	// setters
-	public void setRegistrationNumber(String registrationNumber) throws Exception  {
+	public void setRegistrationNumber(String registrationNumber) throws Exception {
 
 		if (checkRegistrationNumber(registrationNumber) == true) {
 			this.registrationNumber = registrationNumber;
@@ -161,7 +180,7 @@ class Employee {
 
 	}
 
-	public void setLastName(String lastName) throws Exception{
+	public void setLastName(String lastName) throws Exception {
 		if (checkName(lastName) == true) {
 			this.lastName = lastName;
 		} else {
@@ -182,8 +201,14 @@ class Employee {
 		this.salary = salary;
 	}
 
-	public void setBirthDate(String birthDate) {
-		this.birthDate = LocalDate.parse(birthDate);
+	public void setBirthDate(String birthDate) throws Exception{
+
+		if (checkDate(birthDate) == true) {
+			this.birthDate = birthDate;
+		} else {
+			throw new Exception("Birth date is not valid");
+		}
+
 	}
 
 }
