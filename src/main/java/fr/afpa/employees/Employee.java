@@ -43,8 +43,7 @@ class Employee {
 				+ ", \nbirthDate = " + birthDate
 				+ ", \nnetSalary = " + getNetSalary()
 				+ ", \ndaysUntilBirthday = " + daysUntilBirthday(birthDate)
-				+ ", \nisRegistrationNumber = " + checkRegistrationNumber(registrationNumber)
-				+ ", \nisName = " + checkName(getFullName());
+				+ ", \nisRegistrationNumber = " + checkRegistrationNumber(registrationNumber);
 				//+ ", \nisDate = " + checkDate(birthDate);
 	}
 
@@ -62,9 +61,9 @@ class Employee {
 		return ChronoUnit.DAYS.between(currentDate, nextBirthday);
 	}
 
-	public boolean checkRegistrationNumber (String registrationNumber) {
-		
-		boolean flag = false;
+	private boolean checkRegistrationNumber (String registrationNumber) {
+
+		boolean isRegistrationNumber = false;
 		if (registrationNumber.length() != 7) {
 			return false;
 		}
@@ -72,22 +71,22 @@ class Employee {
 			char ch = registrationNumber.charAt(i);
 			if (i == 0 || i == 1 || i == 5 || i == 6) {
 				if (Character.isDigit(ch) == true) {
-					flag = true;
+					isRegistrationNumber = true;
 				} else {
 					return false;
 				}
 			} else {
 				if (Character.isLetter(ch) == true) {
-					flag = true;
+					isRegistrationNumber = true;
 				} else {
 					return false;
 				}
 			}
 		}
-		return flag;
+		return isRegistrationNumber;
 	}
 
-	public boolean checkDate (String birthDate) {
+	private boolean checkDate (String birthDate) {
 		
 		boolean flag = false;
 		for (int i = 0; i < birthDate.length(); i++) {
@@ -101,21 +100,21 @@ class Employee {
 		return flag;
 	}
 
-	public boolean checkName(String fullName) {
+	private boolean checkName(String name) throws Exception{
 
-		boolean flag = false;
-		String str = fullName.replaceAll("\\s", "fullName");
-		for (int i = 0; i < str.length(); i++) {
-			char ch = str.charAt(i);
-			if (Character.isLetter(ch)) {
-				flag = true;
+		boolean isName = false;
+		for (int i = 0; i < name.length(); i++) {
+			char ch = name.charAt(i);
+			if (Character.isLetter(ch) || ch == '-') {
+				isName = true;
 			} else {
 				return false;
+
 			}
 		}
 	
 
-		return flag;
+		return isName;
 	}
 
 	// getters
@@ -152,16 +151,31 @@ class Employee {
 	}
 
 	// setters
-	public void setRegistrationNumber(String registrationNumber) {
-		this.registrationNumber = registrationNumber;
+	public void setRegistrationNumber(String registrationNumber) throws Exception  {
+
+		if (checkRegistrationNumber(registrationNumber) == true) {
+			this.registrationNumber = registrationNumber;
+		} else {
+			throw new Exception("Mauvait format du matricule ptn");
+		}
+
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setLastName(String lastName) throws Exception{
+		if (checkName(lastName) == true) {
+			this.lastName = lastName;
+		} else {
+			throw new Exception("Name can't include special characters except '-'");
+		}
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setFirstName(String firstName) throws Exception {
+		if (checkName(firstName)) {
+			this.firstName = firstName;
+		} else {
+			throw new Exception("Name can't include special characters except '-'");
+		}
+
 	}
 
 	public void setSalary(double salary) {
