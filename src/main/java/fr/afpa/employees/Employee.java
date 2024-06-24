@@ -1,7 +1,6 @@
 package fr.afpa.employees;
 
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.temporal.ChronoUnit;
 
 /*
@@ -19,7 +18,7 @@ class Employee {
 	private String lastName;
 	private String firstName;
 	private double salary;
-	private final LocalDate birthDate;
+	private LocalDate birthDate;
 	private final int socialPart;
 
 	// constructor
@@ -66,6 +65,9 @@ class Employee {
 	public boolean checkRegistrationNumber (String registrationNumber) {
 		
 		boolean flag = false;
+		if (registrationNumber.length() != 7) {
+			return false;
+		}
 		for (int i = 0; i < registrationNumber.length(); i++) {
 			char ch = registrationNumber.charAt(i);
 			if (i == 0 || i == 1 || i == 5 || i == 6) {
@@ -164,6 +166,10 @@ class Employee {
 
 	public void setSalary(double salary) {
 		this.salary = salary;
+	}
+
+	public void setBirthDate(String birthDate) {
+		this.birthDate = LocalDate.parse(birthDate);
 	}
 
 }
